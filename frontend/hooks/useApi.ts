@@ -6,17 +6,34 @@ const baseURL =
 	"http://127.0.0.1:8000";
 
 export function useApi() {
-	// Get Method
 	const get = async (endpoint: string) => {
-		// Ensure endpoint starts with a slash
 		const url =
-			baseURL + "/api" + (endpoint.startsWith("/") ? endpoint : `/${endpoint}`);
-
+			baseURL + "/" + (endpoint.startsWith("/") ? endpoint : `/${endpoint}`);
 		const response = await axios.get(url);
 		if (response.status !== 200) {
 			throw new Error(`GET ${endpoint} failed: ${response.statusText}`);
 		}
 		return response.data;
 	};
-	return { get };
+
+	const post = async (endpoint: string, data: any) => {
+		const url =
+			baseURL + "/" + (endpoint.startsWith("/") ? endpoint : `/${endpoint}`);
+		const response = await axios.post(url, data);
+		if (response.status !== 201 && response.status !== 200) {
+			throw new Error(`POST ${endpoint} failed: ${response.statusText}`);
+		}
+		return response.data;
+	};
+
+	const put = async (endpoint: string, data: any) => {
+		const url =
+			baseURL + "/" + (endpoint.startsWith("/") ? endpoint : `/${endpoint}`);
+		const response = await axios.put(url, data);
+		if (response.status !== 200) {
+			throw new Error(`PUT ${endpoint} failed: ${response.statusText}`);
+		}
+		return response.data;
+	};
+	return { get, post, put };
 }
