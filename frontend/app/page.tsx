@@ -1,4 +1,5 @@
 import TeacherList from "./components/teacherList";
+import RegisteredStudents from "./components/RegisteredStudents";
 import Link from "next/link";
 
 export default function Home() {
@@ -7,6 +8,9 @@ export default function Home() {
 			<div className="flex items-start justify-between gap-4">
 				<TeacherList />
 				<Link href="/add_teacher">Add Teacher</Link>
+			</div>
+			<div>
+				<RegisteredStudents />
 			</div>
 		</div>
 	);
